@@ -18,7 +18,6 @@ import { Descriptions, Skeleton } from 'antd'
 import type { DescriptionsProps } from 'antd'
 import { useMemo, type ComponentProps, type CSSProperties, type ReactNode } from 'react'
 import { useResponsive } from '@/common/responsive/hooks'
-import { fontSize } from '@/config'
 import './EntityInfo.css'
 
 type ItemSpan = ComponentProps<typeof Descriptions.Item>['span']
@@ -145,7 +144,7 @@ const EntityInfo = ({
   className,
   style,
   styles,
-  classNames,
+  classNames: _classNames,
   rootClassName,
   id,
 }: EntityInfoProps) => {

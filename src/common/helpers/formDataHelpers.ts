@@ -15,7 +15,7 @@ export const objectToFormData = <T extends Record<string, unknown>>(
       if (data instanceof File) {
         formData.append(root, data)
       } else if (data instanceof dayjs) {
-        data && formData.append(root, (data as Dayjs).toISOString())
+        formData.append(root, (data as Dayjs).toISOString())
       } else if (Array.isArray(data)) {
         for (let i = 0; i < data.length; i++) {
           appendFormData(data[i], root + '[' + i + ']')

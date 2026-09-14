@@ -86,7 +86,7 @@ export const useTableFullHeightCalculator = (
   )
 
   // State for resize detection fallback (when react-resize-detector is not available)
-  const [resizeObserver, setResizeObserver] = useState<ResizeObserver | null>(null)
+  const [_resizeObserver, setResizeObserver] = useState<ResizeObserver | null>(null)
   const tableWrapperRefFallback = useRef<HTMLDivElement>(null)
 
   // Initialize ResizeObserver fallback if react-resize-detector is not available

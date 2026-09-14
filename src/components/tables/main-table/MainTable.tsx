@@ -37,7 +37,7 @@ const MainTable = <T extends BaseModel<number | string>>({
   const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { t } = useLibTranslation()
   const { isMobile } = useResponsive()
-  const { tableWrapperRef, tableRef, getTableHeight } = useTableFullHeightCalculator(
+  const { tableWrapperRef, getTableHeight } = useTableFullHeightCalculator(
     restProps.scroll?.y,
     tableHeaderRef,
     isMobile,
