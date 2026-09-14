@@ -68,7 +68,8 @@ npm install @softwareifycz/ui-components@0.3.0
 
 Use a token with `read:packages` via environment (`NODE_AUTH_TOKEN`) — never commit tokens.
 
-Publishing uses repository secret `NPM_PUBLISH_TOKEN` because the `softwareifyCZ` org currently disables write permissions for `GITHUB_TOKEN`.
+Publishing uses the Actions `GITHUB_TOKEN` (no personal PAT).
+Org setting required: **softwareifyCZ → Settings → Actions → General → Workflow permissions → Read and write permissions**.
 
 ### Tests decision
 
