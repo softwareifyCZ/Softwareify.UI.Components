@@ -51,6 +51,11 @@ export default defineConfig({
         'react-resize-detector',
         'rc-table/lib/interface',
       ],
+      output: {
+        // Keep stable CSS filename for package.json exports "./styles.css" → "./dist/style.css"
+        assetFileNames: (assetInfo) =>
+          assetInfo.name && assetInfo.name.endsWith('.css') ? 'style.css' : '[name][extname]',
+      },
     },
   },
   test: {
