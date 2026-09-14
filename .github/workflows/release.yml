@@ -6,12 +6,12 @@ name: Release
 #   1. Set package.json "version" to X.Y.Z and merge to main
 #   2. git tag vX.Y.Z && git push origin vX.Y.Z
 #
-# Auth note:
-#   softwareifyCZ org disables write permissions for GITHUB_TOKEN
-#   ("Write permissions for workflows are disabled by the organization").
-#   Publishing therefore uses repository secret NPM_PUBLISH_TOKEN
-#   (classic PAT with write:packages + repo, or fine-grained equivalent).
-#   Prefer enabling org workflow write later, then switch back to GITHUB_TOKEN.
+# Auth: GITHUB_TOKEN only (no personal PAT).
+#
+# Required org setting (softwareifyCZ):
+#   Organization Settings → Actions → General → Workflow permissions
+#   → "Read and write permissions"
+# Without that, npm publish fails with: permission_denied: write_package
 
 on:
   push:
@@ -19,8 +19,8 @@ on:
       - "v*"
 
 permissions:
-  contents: read
-  packages: read
+  contents: write
+  packages: write
 
 jobs:
   release:
@@ -28,15 +28,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Require NPM_PUBLISH_TOKEN
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-        run: |
-          if [ -z "$NPM_PUBLISH_TOKEN" ]; then
-            echo "::error::Missing secret NPM_PUBLISH_TOKEN. Add a GitHub PAT with write:packages (and repo for Releases)."
-            exit 1
-          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -82,10 +73,10 @@ jobs:
 
       - name: Publish to GitHub Packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm publish
 
       - name: Create GitHub Release
         env:
-          GH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create "${GITHUB_REF_NAME}" --generate-notes --verify-tag
