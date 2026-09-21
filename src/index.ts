@@ -64,12 +64,21 @@ export type {
 export { StatCard, SkeletonCard } from './components/cards'
 
 // ─── Content (loaders, empty states, action rows) ───────────
-export { ContentLoader, ContentState, ActionColumnRow } from './components/content'
+export {
+  ContentLoader,
+  ContentState,
+  ActionColumnRow,
+  DetailSkeleton,
+  MobileActionSplitRow,
+} from './components/content'
 export type {
   ContentLoaderProps,
   ContentLoaderVariant,
   ContentStateProps,
   ActionColumnRowProps,
+  DetailSkeletonProps,
+  DetailSkeletonVariant,
+  MobileActionSplitRowProps,
 } from './components/content'
 
 // ─── Shared Components ──────────────────────────────────────
